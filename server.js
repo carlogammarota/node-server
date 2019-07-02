@@ -9,7 +9,8 @@ let Mouse = {x:0,y:0}
 let players = []
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
+  // res.sendFile(__dirname + '/index.html');
+  res.send("HolaWorld")
 });
 
 io.on('connection', function (socket) {
