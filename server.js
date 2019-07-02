@@ -10,6 +10,7 @@ let players = []
 
 app.get('/', function (req, res) {
   // res.sendFile(__dirname + '/index.html');
+  console.log("connect get")
   res.send("HolaWorld")
 });
 
