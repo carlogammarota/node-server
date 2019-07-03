@@ -2,7 +2,7 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-server.listen(80);
+server.listen(process.env.PORT || 5000);
 // WARNING: app.listen(80) will NOT work here!
 let messages = []
 let Mouse = {x:0,y:0}
@@ -22,8 +22,9 @@ io.on('connection', function (socket) {
     messages.push(data)
     console.log("Mensajes", messages);
     socket.emit('requestMensajes', messages);
-    socket.broadcast.emit('requestMensajes', messages)
+    // socket.broadcast.emit('requestMensajes', messages)
   });
+  // io.socket.emit('requestMensajes', messages);
 
   socket.on("PositionMouse", function (data){
     Mouse.x = data.x;
