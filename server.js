@@ -1,6 +1,8 @@
 var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var path = require('path');
+var serveStatic = require('serve-static');
 
 server.listen(process.env.PORT || 5000);
 // WARNING: app.listen(80) will NOT work here!
@@ -9,9 +11,11 @@ let Mouse = {x:0,y:0}
 let players = []
 
 app.get('/', function (req, res) {
-  // res.sendFile(__dirname + '/index.html');
-  console.log("connect get")
-  res.send("HolaWorld")
+  // res.sendFile(__dirname + '/socketclient/public');
+  // res.sendFile(__dirname + '/dist');
+  app.use(serveStatic(path.join(__dirname, '/dist')));
+  console.log("connect get")  
+  // res.send("HolaWorld")
 });
 
 io.on('connection', function (socket) {
@@ -22,7 +26,7 @@ io.on('connection', function (socket) {
     messages.push(data)
     console.log("Mensajes", messages);
     socket.emit('requestMensajes', messages);
-    // socket.broadcast.emit('requestMensajes', messages)
+    socket.broadcast.emit('requestMensajes', messages)
   });
   // io.socket.emit('requestMensajes', messages);
 
