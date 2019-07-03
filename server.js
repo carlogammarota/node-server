@@ -13,9 +13,9 @@ let players = []
 app.get('/', function (req, res) {
   // res.sendFile(__dirname + '/socketclient/public');
   // res.sendFile(__dirname + '/dist');
-  app.use(serveStatic(path.join(__dirname, '/dist')));
+  // app.use(serveStatic(path.join(__dirname, '/dist')));
   console.log("connect get")  
-  // res.send("HolaWorld")
+  res.send("HolaWorld")
 });
 
 io.on('connection', function (socket) {
